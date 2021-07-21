@@ -1,0 +1,83 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.navbar-wapper a {
+  padding-left: 40px;
+}
+
+aside {
+  height: 100vh;
+  width: 20%;
+}
+
+main {
+  min-height: 100vh;
+  width: 80%;
+}
+.main-common-class {
+  position: relative;
+  top: 49px;
+  left: 252px;
+  background-image: linear-gradient(
+    grey,
+    rgb(48, 48, 110),
+    rgb(112, 39, 112),
+    red,
+    rgb(250, 189, 77)
+  );
+}
+.middle-section {
+  display: flex;
+}
+.aside-option {
+  width: 100vh;
+  padding: 0%;
+  list-style-type: none;
+}
+.aside-option {
+  padding: 10px;
+  text-align: center;
+}
+.aside-common-class {
+  position: fixed;
+  top: 50px;
+  display: flex;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+.padding {
+  padding: 12px;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
