@@ -23,7 +23,7 @@ main {
 .main-common-class {
   position: relative;
   top: 49px;
-  left: 252px;
+  left: 256px;
   background-image: linear-gradient(
     grey,
     rgb(48, 48, 110),
@@ -31,6 +31,7 @@ main {
     red,
     rgb(250, 189, 77)
   );
+  position: fixed;
 }
 .middle-section {
   display: flex;
