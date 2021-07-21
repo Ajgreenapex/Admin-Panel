@@ -33,7 +33,7 @@ export default function Trash() {
               return (
                 <div className="col" key={data.id}>
                   <Card style={{ width: "18rem" }}>
-                    <Card.Img variant="top" src={data.file} />
+                    <Card.Img variant="top" src={data?.file || "logo192.png"} />
                     <Card.Body>
                       <Card.Title>Title:{data.name}</Card.Title>
                       <Card.Text>

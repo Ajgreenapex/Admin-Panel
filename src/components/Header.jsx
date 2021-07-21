@@ -20,13 +20,13 @@ export default function Header() {
   };
   return (
     <div>
-      <Navbar className="fixed-top" bg="dark" variant="dark" expand="lg">
+      <Navbar className="fixed-top " bg="dark" variant="dark" expand="lg">
         <Navbar.Text href="#">Admin Panel</Navbar.Text>
         <Nav className="mr-auto navbar-wapper">
           <Link to="/Home">Home</Link>
           <Link to="/Trash">Trash</Link>
         </Nav>
-        <Form className="d-flex">
+        <Form className="d-flex serachPadding">
           <FormControl
             type="search"
             placeholder="Title"

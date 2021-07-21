@@ -9,7 +9,7 @@ export default function ViewCard(props) {
     <div>
       <div className="row mt-5">
         <div className="col mt-5">
-          <img src={data.file || "logo192.png"}></img>
+          <img src={data?.file || "logo192.png"}></img>
         </div>
         <div className="col mt-5">
           <h3>Title</h3>

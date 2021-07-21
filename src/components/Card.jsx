@@ -31,7 +31,11 @@ export default function Cards() {
                 return (
                   <div className="col" key={data.id}>
                     <Card style={{ width: "18rem" }}>
-                      <Card.Img variant="top" src={data.file} alt="img" />
+                      <Card.Img
+                        variant="top"
+                        src={data?.file || "logo192.png"}
+                        alt="img"
+                      />
                       <Card.Body>
                         <Card.Title>Title:{data.name}</Card.Title>
                         <Card.Text>
@@ -74,7 +78,11 @@ export default function Cards() {
                 return (
                   <div className="col" key={data.id}>
                     <Card style={{ width: "18rem" }}>
-                      <Card.Img variant="top" src={data.file} alt="img" />
+                      <Card.Img
+                        variant="top"
+                        src={data?.file || "logo192.png"}
+                        alt="img"
+                      />
                       <Card.Body>
                         <Card.Title>Title:{data.name}</Card.Title>
                         <Card.Text>

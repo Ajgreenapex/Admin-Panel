@@ -103,12 +103,12 @@ export default function Home() {
             </button>
           </div>
         </aside>
-
         <main className="main-common-class">
-          <Button variant="btn btn-primary mt-2 " onClick={handleShow}>
-            Add Product
-          </Button>
-
+          <div className="serachPadding">
+            <Button variant="btn btn-primary mt-2 " onClick={handleShow}>
+              Add Product
+            </Button>
+          </div>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Add Product</Modal.Title>
@@ -137,6 +137,8 @@ export default function Home() {
                 <br />
                 <input
                   type="number"
+                  min="1"
+                  max="100"
                   className="form-control"
                   placeholder="Price"
                   onChange={(e) => {
@@ -206,7 +208,6 @@ export default function Home() {
               </Button>
             </Modal.Footer>
           </Modal>
-          <br />
           <br />
           <Card />
         </main>
