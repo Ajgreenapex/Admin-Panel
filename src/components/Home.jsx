@@ -5,34 +5,22 @@ import { v4 as uuidv4 } from "uuid";
 import Card from "../components/Card";
 import { Button, Modal } from "react-bootstrap";
 import RangeSlider from "react-bootstrap-range-slider";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as yup from "yup";
 export default function Home() {
-  const [name, setName] = useState("");
-  const [file, setFile] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [country, setCountry] = useState("");
   const [stock, setStock] = useState("in");
   const [show, setShow] = useState(false);
   const handleClose = () => {
-    setCountry("");
     setShow(false);
   };
   const handleShow = () => setShow(true);
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const addProducts = () => {
-    const data = {
-      name,
-      file,
-      price,
-      description,
-      remove: false,
-      stock,
-      country,
-      id: uuidv4(),
-    };
-    dispatch(addProduct(data));
+  const addProducts = (values) => {
+    values.id = uuidv4();
+    values.remove = false;
+    dispatch(addProduct(values));
     handleClose();
   };
   const clearFilterHandler = () => {
@@ -40,11 +28,9 @@ export default function Home() {
     dispatch(getProductPriceData([]));
   };
   const filterHandler = () => {
-    console.log("getProductPriceData handler price==>>", state.price);
     let newArray = state.productData.filter((val) => {
       return val.price <= state.price && val.stock === stock;
     });
-    console.log("getProductPriceData handler ==>>", newArray);
     dispatch(getProductPriceData(newArray));
   };
   const onChangePrice = (e) => {
@@ -53,15 +39,39 @@ export default function Home() {
     dispatch(productPrice(num));
   };
 
-  const onchangeCountry = (e) => {
-    const temp = e.target.value;
-    setCountry(temp);
-  };
-
   const stockINOrOut = (e) => {
     const temp = e.target.value;
     setStock(temp);
   };
+  const validate = yup.object().shape({
+    title: yup
+      .string()
+      .max(50, "max 50 characters are required")
+      .matches(/^[a-zA-Z ]+$/, "Only alphabets are allowed.")
+      .required("Title Name is required."),
+    file: yup.string(),
+    // .matches(
+    //   /(http[s]*:\/\/)([a-z\-_0-9\/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_\/._~:?#\[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png)/i,
+    //   "Only image url are allowed."
+    // )
+    // .required("image url is required."),
+    price: yup
+      .number()
+      .required("price is required.")
+      .typeError("Only numbers are allowed.")
+      .positive("Negative numbers are not allowed.")
+      .integer("Phone can't contain a decimal.")
+      .min(10, "Minimum 10 are required.")
+      .max(100, "Maximum 100  are allowed."),
+    country: yup.string().required("Country is required."),
+    stock: yup.string().required("Stock is required."),
+    description: yup
+      .string()
+      .max(150, "max 150 characters are required")
+      .matches(/^[a-zA-Z ]+$/, "Only alphabets are allowed.")
+      .required("Description Name is required."),
+  });
+
   console.log("home ==========>", state);
   return (
     <>
@@ -116,97 +126,162 @@ export default function Home() {
             <Modal.Body>
               <div className="col-sm-6 offset-sm-3">
                 <br />
-                <input
-                  type="text"
-                  maxLength="50"
-                  className="form-control"
-                  placeholder="Title"
-                  onChange={(e) => {
-                    setName(e.target.value);
+                <Formik
+                  initialValues={{
+                    title: "",
+                    file: "",
+                    price: "",
+                    description: "",
+                    country: "",
+                    stock: "in",
                   }}
-                />{" "}
-                <br />
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="url"
-                  onChange={(e) => {
-                    setFile(e.target.value);
+                  validationSchema={validate}
+                  onSubmit={(values) => {
+                    addProducts(values);
                   }}
-                />{" "}
-                <br />
-                <input
-                  type="number"
-                  min="1"
-                  max="100"
-                  className="form-control"
-                  placeholder="Price"
-                  onChange={(e) => {
-                    setPrice(e.target.value);
-                  }}
-                />{" "}
-                <br />
-                <textarea
-                  rows="2"
-                  cols="50"
-                  maxLength="150"
-                  className="form-control"
-                  placeholder="Description"
-                  onChange={(e) => {
-                    setDescription(e.target.value);
-                  }}
-                />{" "}
-                <br />
-                <select
-                  id="country"
-                  onChange={onchangeCountry}
-                  value={country}
-                  className="form-control"
                 >
-                  <option value="">Country/Region</option>
-                  <option value="India">India</option>
-                  <option value="USA">USA</option>
-                  <option value="Germany">Germany</option>
-                  <option value="Australia">Australia</option>
-                </select>
-                <br />
-                <label>
-                  <h3>Stock</h3>
-                </label>
-                <br />
-                <div>
-                  <label htmlFor="in" className="padding">
-                    IN
-                  </label>
-                  <input
-                    type="radio"
-                    name="stock"
-                    id="in"
-                    value="in"
-                    onChange={stockINOrOut}
-                    checked="checked"
-                  ></input>
-                  <label htmlFor="out" className="padding">
-                    Out
-                  </label>
-                  <input
-                    type="radio"
-                    name="stock"
-                    id="out"
-                    value="out"
-                    onChange={stockINOrOut}
-                  ></input>
-                </div>
+                  {({
+                    values,
+                    errors,
+                    touched,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                    isSubmitting,
+                  }) => (
+                    //@ts-ignore
+                    <Form>
+                      <Field
+                        type="text"
+                        maxLength="50"
+                        className={
+                          errors.title && touched.title
+                            ? "form-control is-invalid"
+                            : "form-control"
+                        }
+                        placeholder="Title"
+                        name="title"
+                      />{" "}
+                      <ErrorMessage
+                        name="title"
+                        component="div"
+                        className="invalid-feedback"
+                      />
+                      <br />
+                      <Field
+                        type="text"
+                        className={
+                          errors.url && touched.url
+                            ? "form-control is-invalid"
+                            : "form-control"
+                        }
+                        placeholder="url"
+                        name="file"
+                      />{" "}
+                      <ErrorMessage
+                        name="file"
+                        component="div"
+                        className="invalid-feedback"
+                      />
+                      <br />
+                      <Field
+                        type="text"
+                        className={
+                          errors.price && touched.price
+                            ? "form-control is-invalid"
+                            : "form-control"
+                        }
+                        placeholder="Price"
+                        name="price"
+                      />{" "}
+                      <ErrorMessage
+                        name="price"
+                        component="div"
+                        className="invalid-feedback"
+                      />
+                      <br />
+                      <textarea
+                        rows="2"
+                        cols="50"
+                        maxLength="150"
+                        className={
+                          errors.description && touched.description
+                            ? "form-control is-invalid"
+                            : "form-control"
+                        }
+                        placeholder="Description"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        name="description"
+                      />{" "}
+                      <ErrorMessage
+                        name="description"
+                        component="div"
+                        className="invalid-feedback"
+                      />
+                      <br />
+                      <select
+                        id="country"
+                        className={
+                          errors.country && touched.country
+                            ? "form-control is-invalid"
+                            : "form-control"
+                        }
+                        name="country"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.country}
+                      >
+                        <option value="">Country/Region</option>
+                        <option value="India">India</option>
+                        <option value="USA">USA</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Australia">Australia</option>
+                      </select>
+                      <ErrorMessage
+                        name="country"
+                        component="div"
+                        className="invalid-feedback"
+                      />
+                      <br />
+                      <label>
+                        <h3>Stock</h3>
+                      </label>
+                      <div>
+                        <label htmlFor="in" className="padding">
+                          IN
+                        </label>
+                        <Field
+                          type="radio"
+                          name="stock"
+                          id="in"
+                          value="in"
+                          checked="checked"
+                        ></Field>
+                        <label htmlFor="out" className="padding">
+                          Out
+                        </label>
+                        <Field
+                          type="radio"
+                          name="stock"
+                          id="out"
+                          value="out"
+                        ></Field>
+                      </div>
+                      <br />
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          Close
+                        </Button>
+                        <Button type="submit" variant="primary">
+                          Save
+                        </Button>
+                      </Modal.Footer>
+                    </Form>
+                  )}
+                </Formik>
               </div>
             </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={addProducts}>
-                Save
-              </Button>
-            </Modal.Footer>
           </Modal>
           <br />
           <Card />

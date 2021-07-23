@@ -53,6 +53,13 @@ export default function Reducer(state = initailSate, action) {
         ...state,
         allData: action.payload,
       };
+
+    case actions.GET_UPDATE_DATA:
+      console.log("reuder ===>", action.payload);
+      return {
+        ...state,
+        productData: action.payload,
+      };
     default:
       return state;
   }

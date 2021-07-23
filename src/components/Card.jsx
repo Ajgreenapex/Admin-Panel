@@ -8,7 +8,6 @@ export default function Cards() {
   const dispatch = useDispatch();
   const history = useHistory();
   const viewCard = (data) => {
-    console.log("data", data);
     history.push({ pathname: "/ViewCard", data });
   };
   const handlerRemove = (data) => {
@@ -37,7 +36,7 @@ export default function Cards() {
                         alt="img"
                       />
                       <Card.Body>
-                        <Card.Title>Title:{data.name}</Card.Title>
+                        <Card.Title>Title:{data.title}</Card.Title>
                         <Card.Text>
                           Price:{data.price}
                           <br />
@@ -84,7 +83,7 @@ export default function Cards() {
                         alt="img"
                       />
                       <Card.Body>
-                        <Card.Title>Title:{data.name}</Card.Title>
+                        <Card.Title>Title:{data.title}</Card.Title>
                         <Card.Text>
                           Price:{data.price}
                           <br />

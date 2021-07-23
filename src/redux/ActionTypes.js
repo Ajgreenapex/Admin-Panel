@@ -6,3 +6,5 @@ export const GET_SEARCH_DATA = "GET_SEARCH_DATA";
 export const GET_SEARCH_WORD = "GET_SEARCH_WORD";
 export const GET_PRICE = "GET_PRICE";
 export const GET_PRICE_DATA = "GET_PRICE_DATA";
+export const GET_UPDATE_DATA = "GET_UPDATE_DATA";
+export const GET_All_DATA = "GET_All_DATA";
