@@ -9,7 +9,7 @@ export default function Header() {
 
   const searchHandler = () => {
     let newArray = state.productData.filter((val) => {
-      return val.name.includes(state.serachWord);
+      return val.title.includes(state.serachWord);
     });
     console.log("serach handler ==>>", newArray);
     dispatch(serachProduct(newArray));
