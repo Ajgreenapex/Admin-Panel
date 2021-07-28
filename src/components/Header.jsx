@@ -25,6 +25,7 @@ export default function Header() {
         <Nav className="mr-auto navbar-wapper">
           <Link to="/Home">Home</Link>
           <Link to="/Trash">Trash</Link>
+          <Link to="/SocialMedia">SocialMedia</Link>
         </Nav>
         <Form className="d-flex serachPadding">
           <FormControl

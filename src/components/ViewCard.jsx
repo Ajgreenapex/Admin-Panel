@@ -52,6 +52,7 @@ export default function ViewCard(props) {
     data.title = values.title;
     data.description = values.description;
     data.price = values.price;
+    data.stock = values.stock;
     handleClose();
   };
   console.log("view card", data);

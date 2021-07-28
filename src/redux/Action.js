@@ -85,8 +85,19 @@ export const getProductPriceData = (data) => {
 export const getProductUpdateData = (data) => {
   return async (dispatch) => {
     try {
-      console.log("GET_UPDATE_DATA action===>", data);
+      // console.log("GET_UPDATE_DATA action===>", data);
       dispatch({ type: actions.GET_UPDATE_DATA, payload: data });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const getFaceBookData = (data) => {
+  return async (dispatch) => {
+    try {
+      // console.log("GET_UPDATE_DATA action===>", data);
+      dispatch({ type: actions.GET_FACEBOOK_DATA, payload: data });
     } catch (e) {
       console.log(e);
     }

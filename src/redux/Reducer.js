@@ -7,6 +7,7 @@ const initailSate = {
   priceData: [],
   allData: [],
   price: 0,
+  faceBookData: {},
 };
 
 export default function Reducer(state = initailSate, action) {
@@ -59,6 +60,12 @@ export default function Reducer(state = initailSate, action) {
       return {
         ...state,
         productData: action.payload,
+      };
+    case actions.GET_FACEBOOK_DATA:
+      console.log("reuder face boobk  ===>", action.payload);
+      return {
+        ...state,
+        faceBookData: action.payload,
       };
     default:
       return state;
