@@ -49,7 +49,7 @@ export default function SocialMedia() {
         </>
       ) : (
         <FacebookLogin
-          appId="1947848938701655"
+          appId="503585834279082"
           autoLoad={false}
           fields="name,email,picture"
           // onClick={componentClicked}
