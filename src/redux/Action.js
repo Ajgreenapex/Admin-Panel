@@ -103,3 +103,13 @@ export const getFaceBookData = (data) => {
     }
   };
 };
+export const removeFaceBookData = (data) => {
+  return async (dispatch) => {
+    try {
+      // console.log(" removeFaceBookData action===>", data);
+      dispatch({ type: actions.REMOVE_FACEBOOK_DATA, payload: data });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};

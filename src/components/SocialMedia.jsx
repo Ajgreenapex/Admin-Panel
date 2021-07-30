@@ -1,9 +1,14 @@
 import FacebookLogin from "react-facebook-login";
 import { useDispatch, useSelector } from "react-redux";
-import { getFaceBookData } from "../redux/Action";
+import { Button } from "react-bootstrap";
+import { getFaceBookData, removeFaceBookData } from "../redux/Action";
 export default function SocialMedia() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
+  const logOut = () => {
+    const data = {};
+    dispatch(removeFaceBookData(data));
+  };
   const responseFacebook = (response) => {
     console.log(response);
     const temp = {
@@ -46,6 +51,9 @@ export default function SocialMedia() {
             <h2>Welcome {state.faceBookData.name}</h2>
             Email: {state.faceBookData.email}
           </div>
+          <Button onClick={logOut} variant="primary">
+            Logout
+          </Button>
         </>
       ) : (
         <FacebookLogin

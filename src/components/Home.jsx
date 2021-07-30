@@ -5,12 +5,18 @@ import { v4 as uuidv4 } from "uuid";
 import Card from "../components/Card";
 import { Button, Modal } from "react-bootstrap";
 import RangeSlider from "react-bootstrap-range-slider";
+import StarRatingComponent from "react-star-rating-component";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 export default function Home() {
   const [stock, setStock] = useState("in");
   const [show, setShow] = useState(false);
+  const [rating, setrating] = useState(1);
+  const ratingHandler = (nextValue, prevValue, name) => {
+    setrating(nextValue);
+  };
   const handleClose = () => {
+    setrating(1);
     setShow(false);
   };
   const handleShow = () => setShow(true);
@@ -18,8 +24,10 @@ export default function Home() {
   const dispatch = useDispatch();
 
   const addProducts = (values) => {
+    console.log("submit ===========>", values);
     values.id = uuidv4();
     values.remove = false;
+    values.rating = rating;
     dispatch(addProduct(values));
     handleClose();
   };
@@ -242,6 +250,14 @@ export default function Home() {
                         name="country"
                         component="div"
                         className="invalid-feedback"
+                      />
+                      <br />
+                      <h3>Rating :{rating}</h3>
+                      <StarRatingComponent
+                        name="rating"
+                        starCount={5}
+                        value={rating}
+                        onStarClick={ratingHandler}
                       />
                       <br />
                       <label>

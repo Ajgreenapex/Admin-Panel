@@ -35,7 +35,7 @@ export default function Trash() {
                   <Card style={{ width: "18rem" }}>
                     <Card.Img variant="top" src={data?.file || "logo192.png"} />
                     <Card.Body>
-                      <Card.Title>Title:{data.name}</Card.Title>
+                      <Card.Title>Title:{data.title}</Card.Title>
                       <Card.Text>
                         Price:{data.price}
                         <br />

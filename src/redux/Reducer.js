@@ -21,6 +21,7 @@ export default function Reducer(state = initailSate, action) {
       return {
         ...state,
         productData: action.payload,
+        // allData: action.payload,
       };
 
     case actions.GET_RESTORE_DATA:
@@ -62,6 +63,12 @@ export default function Reducer(state = initailSate, action) {
         productData: action.payload,
       };
     case actions.GET_FACEBOOK_DATA:
+      console.log("reuder face boobk  ===>", action.payload);
+      return {
+        ...state,
+        faceBookData: action.payload,
+      };
+    case actions.REMOVE_FACEBOOK_DATA:
       console.log("reuder face boobk  ===>", action.payload);
       return {
         ...state,
