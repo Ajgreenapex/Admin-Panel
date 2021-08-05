@@ -98,12 +98,12 @@ export default function ViewCard(props) {
             <br />
             <Formik
               initialValues={{
-                title: data.title,
-                file: data.file,
-                price: data.price,
-                description: data.description,
-                country: data.country,
-                stock: data.stock,
+                title: data?.title,
+                file: data?.file,
+                price: data?.price,
+                description: data?.description,
+                country: data?.country,
+                stock: data?.stock,
               }}
               validationSchema={validate}
               onSubmit={(values) => {
