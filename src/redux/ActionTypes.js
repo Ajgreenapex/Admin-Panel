@@ -10,3 +10,4 @@ export const GET_UPDATE_DATA = "GET_UPDATE_DATA";
 export const GET_All_DATA = "GET_All_DATA";
 export const GET_FACEBOOK_DATA = "GET_FACEBOOK_DATA";
 export const REMOVE_FACEBOOK_DATA = "REMOVE_FACEBOOK_DATA";
+export const LIKE = "LIKE";

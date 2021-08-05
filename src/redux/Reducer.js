@@ -1,5 +1,4 @@
 import * as actions from "./ActionTypes";
-
 const initailSate = {
   productData: [],
   serachData: [],
@@ -8,6 +7,7 @@ const initailSate = {
   allData: [],
   price: 0,
   faceBookData: {},
+  like: false,
 };
 
 export default function Reducer(state = initailSate, action) {
@@ -73,6 +73,11 @@ export default function Reducer(state = initailSate, action) {
       return {
         ...state,
         faceBookData: action.payload,
+      };
+    case actions.LIKE:
+      return {
+        ...state,
+        like: action.payload,
       };
     default:
       return state;

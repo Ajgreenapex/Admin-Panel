@@ -5,6 +5,8 @@ import Trash from "../src/components/Trash";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ViewCard from "./components/ViewCard";
 import SocialMedia from "./components/SocialMedia";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <div className="App">
@@ -16,6 +18,7 @@ function App() {
           <Route exact path="/ViewCard" component={ViewCard}></Route>
           <Route exact path="/SocialMedia" component={SocialMedia}></Route>
         </Switch>
+        <ToastContainer />
       </Router>
     </div>
   );
